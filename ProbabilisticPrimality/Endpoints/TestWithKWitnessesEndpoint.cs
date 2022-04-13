@@ -16,7 +16,7 @@ public class TestWithKWitnessesEndpoint : Endpoint<TestWithKWitnessesRequest, Te
     
     public override async Task HandleAsync(TestWithKWitnessesRequest req, CancellationToken ct)
     {
-        var testResult = ProbabilisticPrimalityAlgorithm.TestWithKWitnesses(req.nNumberOfWitnesses, req.IntegerToTest);
+        var testResult = ProbabilisticPrimalityAlgorithm.TestWithKWitnesses(req.NumberOfWitnesses, req.IntegerToTest);
         
         var response = new TestWithKWitnessesResponse()
         {
