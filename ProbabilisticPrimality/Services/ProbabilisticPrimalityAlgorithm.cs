@@ -4,7 +4,8 @@ public static class ProbabilisticPrimalityAlgorithm
 {
     public static bool TestWithWitness(int witness, long integerToTest)
     {
-        if (integerToTest < 2 || integerToTest % 2 == 0) throw new ArgumentException("The integer to test for primality must be odd and greater than 2.");
+        if (integerToTest < 2 || integerToTest % 2 == 0) 
+            throw new ArgumentException("The integer to test for primality must be odd and greater than 2.");
         var d = integerToTest - 1;
         while (d % 2 == 0)
         {
@@ -51,9 +52,9 @@ public static class ProbabilisticPrimalityAlgorithm
         {
             throw new ArgumentException("This endpoint does not support integers to test for primality over 2,152,302,898,746");
         }
-        for (var i = 0; i < starWitnesses.Count; i++)
+        foreach (var witness in starWitnesses)
         {
-            var result = TestWithWitness(starWitnesses[i], integerToTest);
+            var result = TestWithWitness(witness, integerToTest);
             if (!result) return false;
         }
         return true;
