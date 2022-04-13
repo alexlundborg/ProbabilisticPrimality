@@ -10,17 +10,17 @@ public static class ProbabilisticPrimalityAlgorithm
         {
             d /= 2;
         }
-        var intermediateResult = (long) 1;
+        var e = (long) 1;
         for (var i = 0; i < d; ++i)
         {
-            intermediateResult = intermediateResult * witness % integerToTest;
+            e = e * witness % integerToTest;
         }
-        while (d != integerToTest - 1 && intermediateResult != 1 && intermediateResult != integerToTest - 1)
+        while (d != integerToTest - 1 && e != 1 && e != integerToTest - 1)
         {
-            intermediateResult = (intermediateResult * intermediateResult) % integerToTest;
+            e = (e * e) % integerToTest;
             d *= 2;
         }
-        return !(intermediateResult != integerToTest - 1 && d % 2 == 0);
+        return !(e != integerToTest - 1 && d % 2 == 0);
     }
 
     public static bool TestWithKWitnesses(int k, int integerToTest)
