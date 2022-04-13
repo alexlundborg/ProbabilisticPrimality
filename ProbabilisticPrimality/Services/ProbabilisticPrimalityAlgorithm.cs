@@ -2,7 +2,7 @@ namespace ProbabilisticPrimality.Services;
 
 public static class ProbabilisticPrimalityAlgorithm
 {
-    public static bool TestWithWitness(int witness, int integerToTest)
+    public static bool TestWithWitness(int witness, long integerToTest)
     {
         if (integerToTest < 2 || integerToTest % 2 == 0) throw new ArgumentException("The integer to test for primality must be odd and greater than 2.");
         var d = integerToTest - 1;
@@ -29,6 +29,31 @@ public static class ProbabilisticPrimalityAlgorithm
         for (var i = 0; i < k; i++)
         {
             var result = TestWithWitness(random.Next(integerToTest - 1) + 1, integerToTest);
+            if (!result) return false;
+        }
+        return true;
+    }
+    
+    public static bool TestWithStarWitnesses(long integerToTest)
+    {
+        var starWitnesses = new List<int>{2, 3};
+        if (integerToTest >= 1373653)
+        {
+            starWitnesses.Add(5);
+        }
+
+        if (integerToTest >= 25326001)
+        {
+            starWitnesses.AddRange(new List<int>{7, 11});
+        }
+
+        if (integerToTest >= 2152302898747)
+        {
+            throw new ArgumentException("This endpoint does not support integers to test for primality over 2,152,302,898,746");
+        }
+        for (var i = 0; i < starWitnesses.Count; i++)
+        {
+            var result = TestWithWitness(starWitnesses[i], integerToTest);
             if (!result) return false;
         }
         return true;
