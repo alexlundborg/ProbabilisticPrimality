@@ -9,7 +9,7 @@ public static class ProbabilisticPrimalityAlgorithm
     {
         if (integerToTest <= 3 || integerToTest % 2 == 0)
         {
-            var message = $"Number to test must be an odd integer greater than 3.";
+            var message = "Number to test must be an odd integer greater than 3.";
             throw new ValidationException(message, new []
             {
                 new ValidationFailure(nameof(integerToTest), message)
@@ -17,7 +17,7 @@ public static class ProbabilisticPrimalityAlgorithm
         }
         if (witness < 1 || witness >= integerToTest)
         {
-            var message = $"Witness must be a positive integer less than the integer to test.";
+            var message = "Witness must be a positive integer less than the integer to test.";
             throw new ValidationException(message, new []
             {
                 new ValidationFailure(nameof(integerToTest), message)
@@ -46,7 +46,7 @@ public static class ProbabilisticPrimalityAlgorithm
     {
         if (k < 1 || k >= integerToTest)
         {
-            var message = $"Number to witnesses must be a positive integer less than the integer to test.";
+            var message = "Number to witnesses must be a positive integer less than the integer to test.";
             throw new ValidationException(message, new []
             {
                 new ValidationFailure(nameof(integerToTest), message)
@@ -77,7 +77,11 @@ public static class ProbabilisticPrimalityAlgorithm
 
         if (integerToTest >= 2152302898747)
         {
-            throw new ArgumentException("This endpoint does not support integers to test for primality over 2,152,302,898,746");
+            var message = "This endpoint does not support integers to test for primality over 2,152,302,898,746";
+            throw new ValidationException(message, new []
+            {
+                new ValidationFailure(nameof(integerToTest), message)
+            });
         }
         foreach (var witness in starWitnesses)
         {
