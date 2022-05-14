@@ -1,11 +1,20 @@
+using FluentValidation;
+using FluentValidation.Results;
+
 namespace ProbabilisticPrimality.Services;
 
 public static class ProbabilisticPrimalityAlgorithm
 {
     public static bool TestWithWitness(int witness, long integerToTest)
     {
-        if (integerToTest < 2 || integerToTest % 2 == 0) 
-            throw new ArgumentException("The integer to test for primality must be odd and greater than 2.");
+        if (integerToTest < 2 || integerToTest % 2 == 0)
+        {
+            var message = $"Number to test must be an odd integer greater than 2.";
+            throw new ValidationException(message, new []
+            {
+                new ValidationFailure(nameof(integerToTest), message)
+            });
+        }
         var d = integerToTest - 1;
         while (d % 2 == 0)
         {
