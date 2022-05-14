@@ -15,7 +15,7 @@ public class TestWithWitnessEndpoint : Endpoint<TestWithWitnessRequest, TestWith
         Summary(s => {
             s.Summary = "Test primality of an integer using a specified witness number less than the integer to test";
             s.Description = "If the test result says that the integer to test is composite, " +
-                            "you can be certain that it is composite. However certain witness numbers " +
+                            "you can be sure that it is composite. However certain witness numbers " +
                             "are liars and will incorrectly declare that an integer is prime. At most " +
                             "1/4 of witnesses are liars. if the integer to test is composite then running " +
                             "k iterations of this primality test will declare the integer to be probably prime" +
