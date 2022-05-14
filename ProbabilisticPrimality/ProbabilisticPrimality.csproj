@@ -10,6 +10,7 @@
         <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.2.0" />
         <PackageReference Include="FastEndpoints" Version="4.2.0-beta9" />
         <PackageReference Include="FastEndpoints.Swagger" Version="4.2.0-beta9" />
+        <PackageReference Include="FluentValidation" Version="11.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
