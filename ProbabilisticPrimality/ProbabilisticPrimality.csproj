@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FastEndpoints" Version="4.1.0-beta4" />
+        <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.2.0" />
+        <PackageReference Include="FastEndpoints" Version="4.2.0-beta9" />
+        <PackageReference Include="FastEndpoints.Swagger" Version="4.2.0-beta9" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 

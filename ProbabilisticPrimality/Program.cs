@@ -1,29 +1,20 @@
 using FastEndpoints;
+using FastEndpoints.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddFastEndpoints();
-var app = builder.Build();
+builder.Services.AddSwaggerDoc();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+var app = builder.Build();
 
 app.UseFastEndpoints();
 
+app.UseOpenApi();
+app.UseSwaggerUi3(s => s.ConfigureDefaults());
+
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
 
 app.Run();

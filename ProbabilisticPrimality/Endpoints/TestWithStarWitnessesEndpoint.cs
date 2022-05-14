@@ -9,8 +9,8 @@ public class TestWithStarWitnessesEndpoint : Endpoint<TestWithStarWitnessesReque
 {
     public override void Configure()
     {
-        Verbs(Http.POST);
-        Routes("TestWithStarWitnesses");
+        Verbs(Http.GET);
+        Routes("/TestWithStarWitnesses/{IntegerToTest}");
         AllowAnonymous();
     }
     

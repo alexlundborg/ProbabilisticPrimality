@@ -9,8 +9,8 @@ public class TestWithWitnessEndpoint : Endpoint<TestWithWitnessRequest, TestWith
 {
     public override void Configure()
     {
-        Verbs(Http.POST);
-        Routes("TestWithWitness");
+        Verbs(Http.GET);
+        Routes("/TestWithWitness/{IntegerToTest}/{Witness}");
         AllowAnonymous();
     }
     
