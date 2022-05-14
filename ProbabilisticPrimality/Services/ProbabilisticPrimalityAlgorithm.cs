@@ -7,14 +7,23 @@ public static class ProbabilisticPrimalityAlgorithm
 {
     public static bool TestWithWitness(int witness, long integerToTest)
     {
-        if (integerToTest < 2 || integerToTest % 2 == 0)
+        if (integerToTest <= 3 || integerToTest % 2 == 0)
         {
-            var message = $"Number to test must be an odd integer greater than 2.";
+            var message = $"Number to test must be an odd integer greater than 3.";
             throw new ValidationException(message, new []
             {
                 new ValidationFailure(nameof(integerToTest), message)
             });
         }
+        if (witness < 1 || witness >= integerToTest)
+        {
+            var message = $"Witness must be a positive integer less than the integer to test.";
+            throw new ValidationException(message, new []
+            {
+                new ValidationFailure(nameof(integerToTest), message)
+            });
+        }
+
         var d = integerToTest - 1;
         while (d % 2 == 0)
         {
@@ -35,6 +44,15 @@ public static class ProbabilisticPrimalityAlgorithm
 
     public static bool TestWithKWitnesses(int k, int integerToTest)
     {
+        if (k < 1 || k >= integerToTest)
+        {
+            var message = $"Number to witnesses must be a positive integer less than the integer to test.";
+            throw new ValidationException(message, new []
+            {
+                new ValidationFailure(nameof(integerToTest), message)
+            });
+        }
+        
         var random = new Random();
         for (var i = 0; i < k; i++)
         {
