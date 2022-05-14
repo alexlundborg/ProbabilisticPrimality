@@ -18,7 +18,8 @@ public class TestWithStarWitnessesEndpoint : Endpoint<TestWithStarWitnessesReque
                             "For numbers up to 25326001, 5 is added. For greater numbers, 7 and 11 are added. " +
                             "Note that testing primality for larger numbers take longer time. " +
                             "Read more here: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Miller_test";
-        }); 
+            s.Response<TestWithStarWitnessesResponse>(200, "Test was successful");
+            s.Response<ValidationFailureResponse>(400, "The request did not pass validation");        }); 
     }
     
     public override async Task HandleAsync(TestWithStarWitnessesRequest req, CancellationToken ct)

@@ -21,6 +21,8 @@ public class TestWithKWitnessesEndpoint : Endpoint<TestWithKWitnessesRequest, Te
                             "1/4 of witnesses are liars. if the integer to test is composite then running " +
                             "k iterations of this primality test will declare the integer to be probably prime" +
                             "with a probability at most 4 to the power of −k. Read more here: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Accuracy";
+            s.Response<TestWithKWitnessesResponse>(200, "Test was successful");
+            s.Response<ValidationFailureResponse>(400, "The request did not pass validation");
         }); 
     }
     
