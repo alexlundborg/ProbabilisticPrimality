@@ -28,7 +28,13 @@ app.UseFastEndpoints(x =>
     };
 });
 app.UseOpenApi();
-app.UseSwaggerUi3(s => s.ConfigureDefaults());
+app.UseSwaggerUi3(s =>
+{
+    s.ConfigureDefaults();
+    s.CustomStylesheetPath = "/swagger-ui/SwaggerDark.css";
+});
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
