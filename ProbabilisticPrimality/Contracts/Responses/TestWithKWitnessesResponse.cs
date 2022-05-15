@@ -4,5 +4,5 @@ namespace ProbabilisticPrimality.Contracts.Responses;
 
 public class TestWithKWitnessesResponse
 {
-    public string Result { [UsedImplicitly] get; set; }
+    public string Result { [UsedImplicitly] get; init; } = default!;
 }
