@@ -27,6 +27,7 @@ app.UseFastEndpoints(x =>
         };
     };
 });
+
 app.UseOpenApi();
 app.UseSwaggerUi3(s =>
 {
