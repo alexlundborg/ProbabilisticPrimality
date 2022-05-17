@@ -1,36 +1,36 @@
 name: deploy to lambda
-on:   
+on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
+defaults:
+  run:
+    working-directory: ./Services
+
 jobs:
-  deploy_zip:
-    name: deploy lambda function
+  build:
+
     runs-on: ubuntu-latest
+    env: 
+      working-directory: ./Services
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup .NET Core
+    - uses: actions/checkout@v2
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    # dotnet build and publish
-    - name: Build with dotnet
-      run: |
-        mkdir example && cd example && dotnet build --configuration Release
-    - name: dotnet publish
-      run: |
-        dotnet publish -c Release -o app && zip app.zip app
-    - name: default deploy
-      uses: appleboy/lambda-action@master
-      with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: eu-west-1
-          function_name: ProbabilisticPrimality
-          source: 'example/app.zip'
-          memory_size: 256
-          timeout: 30
-          handler: ProbabilisticPrimality
-          runtime: dotnet6
+    - name: AWS CLI
+      run: dotnet tool install -g Amazon.Lambda.Tools
+    - name: Restore dependencies
+      run: dotnet restore ProbabilisticPrimality.sln
+    - name: Build
+      run: dotnet build --no-restore ProbabilisticPrimality.sln
+    - name: Deploy to Lambda
+      working-directory: ./Services/ProbabilisticPrimality
+      run: dotnet lambda deploy-function ProbabilisticPrimality
+
