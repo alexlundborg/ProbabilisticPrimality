@@ -5,20 +5,34 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  deploy_source:
-    name: deploy lambda from source
+  deploy_zip:
+    name: deploy lambda function
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: [1.13.x]
+        
     steps:
-      - name: checkout source code
-        uses: actions/checkout@v1
-      - name: default deploy
-        uses: appleboy/lambda-action@master
-        with:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    
+    # dotnet build and publish
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: dotnet publish
+      run: |
+        dotnet publish -c Release && zip deployment.zip main
+    - name: default deploy
+      uses: appleboy/lambda-action@master
+      with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: eu-west-1
           function_name: ProbabilisticPrimality
-          zip_file: example/deployment.zip
+          zip_file: deployment.zip
           memory_size: 256
           timeout: 30
           handler: ProbabilisticPrimality
