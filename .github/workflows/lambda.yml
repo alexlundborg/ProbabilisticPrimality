@@ -26,7 +26,7 @@ jobs:
       run: dotnet build --configuration Release
     - name: dotnet publish
       run: |
-        dotnet publish -c Release -o app"
+        dotnet publish -c Release -o app
     - name: default deploy
       uses: appleboy/lambda-action@master
       with:
