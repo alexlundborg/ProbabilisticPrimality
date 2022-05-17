@@ -2,7 +2,9 @@ name: deploy to lambda
 on:
   workflow_run:
     workflows: [".NET"]
-
+    types:
+      - completed
+      
 jobs:
   build:
 
