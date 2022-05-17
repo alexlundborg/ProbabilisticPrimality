@@ -17,10 +17,11 @@ jobs:
         dotnet-version: 6.0.x
     # dotnet build and publish
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: |
+        mkdir example && cd example && dotnet build --configuration Release
     - name: dotnet publish
       run: |
-        mkdir example && cd example && dotnet publish -c Release -o app && zip app.zip app
+        dotnet publish -c Release -o app && zip app.zip app
     - name: default deploy
       uses: appleboy/lambda-action@master
       with:
