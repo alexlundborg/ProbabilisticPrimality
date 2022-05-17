@@ -34,7 +34,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: eu-west-1
           function_name: ProbabilisticPrimality
-          zip_file: package.zip
+          zip_file: /home/runner/package.zip
           memory_size: 256
           timeout: 30
           handler: ProbabilisticPrimality
