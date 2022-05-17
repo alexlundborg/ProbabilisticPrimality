@@ -9,7 +9,7 @@ public static class ProbabilisticPrimalityAlgorithm
     {
         if (integerToTest <= 3 || integerToTest % 2 == 0)
         {
-            var message = "Number to test must be an odd integer greater than 3.";
+            var message = "Integer to test must be odd and greater than 3.";
             throw new ValidationException(message, new []
             {
                 new ValidationFailure(nameof(integerToTest), message)

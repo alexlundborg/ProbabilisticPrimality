@@ -12,7 +12,7 @@ builder.Services.AddSwaggerDoc(settings =>
 {
     settings.Title = "Probabilistic Primality Test";
     settings.Version = "v1";
-    settings.Description = "Primality test using witness numbers. Witness numbers are numbers that declare whether an odd integer greater than 3 is prime or composite.";
+    settings.Description = "Primality test using witness numbers. Witness numbers are numbers that testify to whether an odd integer greater than 3 is prime or composite.";
 });
 var app = builder.Build();
 
