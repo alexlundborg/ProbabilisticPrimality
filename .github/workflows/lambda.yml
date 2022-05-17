@@ -26,6 +26,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore ProbabilisticPrimality.sln
     - name: Deploy to Lambda
-      working-directory: ./Services/ProbabilisticPrimality
+      working-directory: ./ProbabilisticPrimality
       run: dotnet lambda deploy-function ProbabilisticPrimality
 
