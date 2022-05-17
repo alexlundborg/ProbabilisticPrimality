@@ -20,7 +20,7 @@ jobs:
       run: dotnet build --configuration Release
     - name: dotnet publish
       run: |
-        dotnet publish -c Release -o app
+        mkdir example && cd example && dotnet publish -c Release -o app && zip app.zip app
     - name: default deploy
       uses: appleboy/lambda-action@master
       with:
@@ -28,7 +28,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: eu-west-1
           function_name: ProbabilisticPrimality
-          source: './app'
+          source: 'example/app.zip'
           memory_size: 256
           timeout: 30
           handler: ProbabilisticPrimality
