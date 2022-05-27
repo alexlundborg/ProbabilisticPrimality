@@ -1,5 +1,6 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using NSwag.AspNetCore;
 using ProbabilisticPrimality.Contracts.Responses;
 using ProbabilisticPrimality.Validation;
 
@@ -38,5 +39,16 @@ app.UseSwaggerUi3(s =>
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
+
+app.Use(async (context, next) =>
+{
+    if (!context.Request.Path.Value!.Contains("/swagger", StringComparison.OrdinalIgnoreCase))
+    {
+        context.Response.Redirect("swagger");
+        return;
+    }
+
+    await next();
+});
 
 app.Run();
