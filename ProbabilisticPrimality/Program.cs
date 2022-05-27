@@ -39,4 +39,15 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
+app.Use(async (context, next) =>
+{
+    if (!context.Request.Path.Value!.Contains("/swagger", StringComparison.OrdinalIgnoreCase))
+    {
+        context.Response.Redirect("swagger");
+        return;
+    }
+
+    await next();
+});
+
 app.Run();
