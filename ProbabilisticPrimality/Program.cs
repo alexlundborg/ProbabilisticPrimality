@@ -1,6 +1,5 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using NSwag.AspNetCore;
 using ProbabilisticPrimality.Contracts.Responses;
 using ProbabilisticPrimality.Validation;
 
