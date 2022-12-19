@@ -31,7 +31,7 @@ public class ProbabilisticPrimalityAlgorithmTests
     [InlineData(83)]
     [InlineData(89)]
     [InlineData(97)]
-    public void First100PrimesGreaterThanThreeAsIntegerToTestUsingTestWithStarWitnessesShouldReturnTrue(int primeNumber)
+    public void TestWithStarWitnesses_ShouldReturnTrue_WhenUsingPrimesGreaterThanThreeAndLessThan100AsIntegerToTest(int primeNumber)
     {
         var testResult = ProbabilisticPrimalityAlgorithm.TestWithStarWitnesses(primeNumber);
         Assert.True(testResult);
@@ -63,7 +63,7 @@ public class ProbabilisticPrimalityAlgorithmTests
     [InlineData(93)]
     [InlineData(95)]
     [InlineData(99)]
-    public void First100OddCompositeNumbersAsIntegerToTestUsingTestWithStarWitnessesShouldReturnFalse(int compositeNumber)
+    public void TestWithStarWitnesses_ShouldReturnFalse_WhenUsingCompositeNumbersLessThan100AsIntegerToTest(int compositeNumber)
     {
         var testResult = ProbabilisticPrimalityAlgorithm.TestWithStarWitnesses(compositeNumber);
         Assert.False(testResult);
@@ -85,7 +85,7 @@ public class ProbabilisticPrimalityAlgorithmTests
     [InlineData(5, 5461)]
     [InlineData(5, 5611)]
     [InlineData(5, 7813)]
-    public void PseudoPrimesAsIntegerToTestAndLiarsAsWitnessUsingTestWithWitnessShouldReturnFalse(int liar, int pseudoPrime)
+    public void TestWithWitness_ShouldReturnTrue_WhenUsingPseudoPrimesAsIntegerToTestAndLiarsAsWitness(int liar, int pseudoPrime)
     {
         var testResult = ProbabilisticPrimalityAlgorithm.TestWithWitness(liar, pseudoPrime);
         Assert.True(testResult);
@@ -95,29 +95,9 @@ public class ProbabilisticPrimalityAlgorithmTests
     [InlineData(10, 11)]
     [InlineData(10, 111)]
     [InlineData(10, 1111)]
-    public void ValidIntegerAsIntegerToTestAndValidNumberOfWitnessesAndAsKUsingTestWithKWitnessesShouldReturnBool(int k, int integerToTest)
+    public void TestWithKWitnesses_ShouldReturnBool_WhenUsingValidIntegerAsIntegerToTestAndValidNumberOfWitnessesAsK(int k, int integerToTest)
     {
         var testResult = ProbabilisticPrimalityAlgorithm.TestWithKWitnesses(k, integerToTest);
         Assert.IsType<bool>(testResult);
-    }
-    
-    [Theory]
-    [InlineData(-1)]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(3)]
-    public void IntegersLessThan4AsIntegerToTestUsingTestWithStarWitnessesShouldThrowValidationException(int invalidInteger)
-    {
-        Assert.Throws<ValidationException>(() => ProbabilisticPrimalityAlgorithm.TestWithStarWitnesses(invalidInteger));
-    }
-    
-    [Theory]
-    [InlineData(4)]
-    [InlineData(6)]
-    [InlineData(8)]
-    public void EvenIntegerAsIntegerToTestUsingTestWithStarWitnessesShouldThrowValidationException(int invalidInteger)
-    {
-        Assert.Throws<ValidationException>(() => ProbabilisticPrimalityAlgorithm.TestWithStarWitnesses(invalidInteger));
     }
 }
