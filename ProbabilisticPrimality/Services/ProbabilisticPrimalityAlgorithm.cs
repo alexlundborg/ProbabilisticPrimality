@@ -4,38 +4,36 @@ public static class ProbabilisticPrimalityAlgorithm
 {
     public static bool TestWithWitness(int witness, long integerToTest)
     {
-        var d = integerToTest - 1;
-        while (d % 2 == 0)
+        var x = integerToTest - 1;
+        while (x % 2 == 0)
         {
-            d /= 2;
+            x >>= 1;
         }
-        var e = (long) 1;
-        for (var i = 0; i < d; ++i)
+        var y = (long) 1;
+        for (var i = 0; i < x; ++i)
         {
-            e = e * witness % integerToTest;
+            y = y * witness % integerToTest;
         }
-        while (d != integerToTest - 1 && e != 1 && e != integerToTest - 1)
+        while (x != integerToTest - 1 && y != 1 && y != integerToTest - 1)
         {
-            e = (e * e) % integerToTest;
-            d *= 2;
+            y = (y * y) % integerToTest;
+            x *= 2;
         }
-        return !(e != integerToTest - 1 && d % 2 == 0);
+        return !(y != integerToTest - 1 && x % 2 == 0);
     }
 
     public static bool TestWithKWitnesses(int k, int integerToTest)
     {
         var random = new Random();
-        for (var i = 0; i < k; i++)
-        {
-            var result = TestWithWitness(random.Next(integerToTest - 1) + 1, integerToTest);
-            if (!result) return false;
-        }
-        return true;
+        return Enumerable.Range(0, k)
+            .Select(_ => TestWithWitness(random.Next(1, integerToTest), integerToTest))
+            .All(result => result);
     }
     
     public static bool TestWithStarWitnesses(long integerToTest)
     {
         var starWitnesses = new List<int>{2, 3};
+        
         if (integerToTest >= 1373653)
         {
             starWitnesses.Add(5);
