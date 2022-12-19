@@ -11,8 +11,8 @@ public class TestWithWitnessValidator : Validator<TestWithWitnessRequest>
     public TestWithWitnessValidator()
     {
         RuleFor(x => x.IntegerToTest)
-            .GreaterThan(3)
-            .WithMessage("Integer to test must be greater than 3.")
+            .GreaterThan(2)
+            .WithMessage("Integer to test must be greater than 2.")
             .Must(integerToTest => integerToTest % 2 != 0)
             .WithMessage("Integer to test must be odd.");
         
